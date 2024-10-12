@@ -1,38 +1,36 @@
-import {useDispatch, useSelector} from "react-redux";
-import UsersReducer from "../../Redux/reducers/UsersReducer";
-import { changeInputAction, addUserAction, deleteUserAction } from "../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPokemonAction } from "../../Redux/actions";
+import PokemonCard from "../../component/UserCard";
+import { useEffect } from "react";
 
-
-const UsersPage = () => {
-    const {value, users} = useSelector(state => state.UsersReducer);
-
-
+const PokemonsPage = () => {
+    const { pokemons, loading, error } = useSelector((state) => state.PokemonReducer);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(fetchPokemonAction());
+    }, [dispatch]);
 
-    const addUser = () => {
-        dispatch(addUserAction(value))
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
-    }
-    const deleteUser = (id) => {
-        dispatch(deleteUserAction())
-    }
-
-    const changeInput = (event) => {
-        dispatch(changeInputAction(event.target.value))
-    }
-    console.log(users)
-
-    return(
-        <div>
-            <input type="text" placeholder="Name" onChange={changeInput} value={value}/>
-            <button onClick={addUser} >add</button>
-            <button onClick={deleteUser}>delete all</button>
-            {users.map((user, index) => <p key={index}>{user}</p>)}
+    return (
+        <div style={{
+            display: 'flex',
+            flexWrap: "wrap",
+            gap: '20px',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            {pokemons.length > 0 ? (
+                pokemons.map((pokemon, index) => (
+                    <PokemonCard key={index} pokemon={pokemon} />
+                ))
+            ) : (
+                <p>нету покемонов</p>
+            )}
         </div>
+    );
+};
 
-
-    )
-}
-
-export default UsersPage;
+export default PokemonsPage;
