@@ -36,3 +36,70 @@
     transform: rotate(360deg);
   }
 }
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.add-task input {
+  padding: 10px;
+  font-size: 16px;
+  width: 70%;
+}
+
+.add-task button {
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 16px;
+}
+
+.task-filter button {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.task-filter .activeAll {
+  background-color: yellow;
+  color: black;
+}
+
+.task-filter .active {
+  background-color: greenyellow;
+  color: black;
+}
+
+.task-filter .activeCompleted {
+  background-color: lightblue;
+  color: black;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.task-list li.completed span {
+  text-decoration: line-through;
+}
+
+div{
+  flex-direction: column;
+  gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
